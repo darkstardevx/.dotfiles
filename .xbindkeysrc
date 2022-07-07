@@ -1,0 +1,25 @@
+#VolUp
+"amixer set Master 5%+"
+    m:0x0 + c:123
+    XF86AudioRaiseVolume 
+
+#VolDown
+"amixer set Master 5%-"
+    m:0x0 + c:122
+    XF86AudioLowerVolume
+
+#Mute
+"amixer -D pulse set Master 1+ toggle"
+	XF86AudioMute
+
+#PLAY
+"mpc toggle"
+	XF86AudioPlay
+
+#Next
+"mpc next"
+	XF86AudioNext
+
+#Previous
+"mpc previous"
+	XF86AudioPrev
