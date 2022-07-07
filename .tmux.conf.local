@@ -1,0 +1,134 @@
+# variables
+is_macos='uname | grep -q Darwin'
+
+# setup mouse and proper terminal scrolling
+
+set -g mouse on
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'copy-mode -e'"
+
+# history scrollback
+set -g history-limit 40000
+
+# enabling vi mode
+set-window-option -g mode-keys vi
+
+# No delay for escape key press
+set -sg escape-time 0
+
+# 256 color
+set -g default-terminal "tmux-256color"
+set -g default-terminal "screen-256color"
+
+# disable auto rename
+set-window-option -g automatic-rename off
+
+# setup key bindings
+
+bind-key -T copy-mode-vi 'v' send -X begin-selection
+bind-key -T copy-mode-vi 'y' send -X copy-selection
+
+# copy and paste using macOS clipboard
+
+if-shell "$is_macos" "set -g default-command 'reattach-to-user-namespace -l zsh'"
+if-shell "$is_macos" "bind-key -T copy-mode-vi y copy-pipe 'reattach-to-user-namespace pbcopy'"
+if-shell "$is_macos" "bind-key -T copy-mode-vi MouseDragEnd1Pane copy-pipe 'reattach-to-user-namespace pbcopy'"
+
+# setup statusbar design
+
+set -g status-justify left
+set -g status-justify right
+set -g status-bg default
+set -g status-fg colour12
+set -g status-interval 2
+set -g status-right-length 800
+set -g status-left-length 800
+#set -g status-right "#{spotify_playback} #{spotify_status} ↑ #{uptime} ⇅ #{cpu} ☰ #{ram} ∴ #{ip} ↯ #{battery_level} ⧖ #(date '+%a, %b %d, %H:%M') "
+
+#set -g status-left "#{battery_status_bg} #{battery_percentage} #[bg=default,fg=default] #H %d/%m %H:%M"
+
+# statusbar left + right settings
+tmux_conf_theme_status_left=" ❐ #S | ↑#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} | #(spotifycli --statusshort) | #(wanip)"
+
+tmux_conf_theme_status_right="#{prefix}#{pairing}#{synchronized} #(curl wttr.in?format=3) , %R , %d %b | #{username}#{root} | #{hostname} |"
+
+# List of plugins
+ set -g @tpm_plugins '          \
+   tmux-plugins/tpm             \
+   tmux-plugins/tmux-sensible   \
+   tmux-plugins/tmux-resurrect  \
+   tmux-plugins/tmux-continuum  \
+   tmux-plugins/tmux-copycat    \
+   tmux-plugins/tmux-open       \
+   tmux-plugins/tmux-yank       \
+   tmux-plugins/tmux-sidebar    \
+   tmux-plugins/tmux-pain-control\
+   tmux-plugins/tmux-urlview    \
+   tmux-plugins/tmux-logging    \
+   tmux-plugins/tmux-sessionist \
+   pwittchen/tmux-plugin-battery\
+   pwittchen/tmux-plugin-uptime \
+   pwittchen/tmux-plugin-cpu    \
+   pwittchen/tmux-plugin-ram    \
+   pwittchen/tmux-plugin-ip     \
+   pwittchen/tmux-plugin-spotify\
+   jimeh/tmux-themepack         \
+   jatap/tmux-base16-statusline \
+   jamesoff/tmux-loadavg        \
+ '
+
+# plugins customization
+set -g @sidebar-tree-command 'tree -C'
+
+set -g @themepack 'powerline/double/magenta'
+
+######################################
+# tmux-continuum - automatically save and restore tmux sessions
+# https://github.com/tmux-plugins/tmux-continuum
+#####################################
+#set -g @plugin 'tmux-plugins/tmux-continuum'
+# Restore last saved enviroment
+set -g @continuum-restore 'on'
+# Set autosave interval
+set -g @continuum-save-interval '5'
+# Show continiuum state in statusbar
+#set -g status-right 'Continuum status: #{continuum_status}'
+# Starting tmux with system https://github.com/tmux-plugins/tmux-continuum/blob/master/docs/automatic_start.md
+
+#####################################
+# tmux-resurrect - save and reload sessions and windows after a restart
+# https://github.com/tmux-plugins/tmux-resurrect
+# Default keybinds : save - command + c + s && restore command + c + r
+######################################
+#set -g @plugin 'tmux-plugins/tmux-resurrect'
+### tmux-resurrect extra settings ###
+# keep vim sessions after reboot
+set -g @resurrect-strategy-vim 'session'
+# keep pane contents
+set -g @resurrect-capture-pane-contents 'on'
+# restore bash history
+set -g @resurrect-save-bash-history 'on'
+### /tmux-resurrect extra settings ###
+
+run-shell ~/.tmux/plugins/tpm/tpm
+run-shell ~/.tmux/plugins/tmux-resurrect/resurrect.tmux
+run-shell ~/.tmux/plugins/tmux-continuum/continuum.tmux
+run-shell ~/.tmux/plugins/tmux-sensible/sensible.tmux
+run-shell ~/.tmux/plugins/tmux-copycat/copycat.tmux
+run-shell ~/.tmux/plugins/tmux-open/open.tmux
+run-shell ~/.tmux/plugins/tmux-yank/yank.tmux
+run-shell ~/.tmux/plugins/tmux-sidebar/sidebar.tmux
+run-shell ~/.tmux/plugins/tmux-logging/logging.tmux
+run-shell ~/.tmux/plugins/tmux-plugin-uptime/uptime.tmux
+run-shell ~/.tmux/plugins/tmux-sessionist/sessionist.tmux
+run-shell ~/.tmux/plugins/tmux-pain-control/pain_control.tmux
+run-shell ~/.tmux/plugins/tmux-urlview/urlview.tmux
+run-shell ~/.tmux/plugins/tmux-themepack/themepack.tmux
+run-shell ~/.tmux/plugins/tmux-plugin-spotify/spotify.tmux
+run-shell ~/.tmux/plugins/tmux-plugin-ip/ip.tmux
+run-shell ~/.tmux/plugins/tmux-plugin-cpu/cpu.tmux
+run-shell ~/.tmux/plugins/tmux-plugin-ram/ram.tmux
+run-shell ~/.tmux/plugins/tmux-plugin-battery/battery.tmux
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+# see more at: https://github.com/tmux-plugins/tpm
+run '~/.tmux/plugins/tpm/tpm'
