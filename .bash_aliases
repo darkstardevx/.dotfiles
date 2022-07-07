@@ -4,19 +4,12 @@
 # Ultimate Bash Aliases for Arch Linux                                                        #
 # Collected from various sources                                                              #
 # Darkstardevx [darkstardevx@gmail.com]                                                       #    
-# https://github.com/darkstardevx/scripts                                                     #
+# https://github.com/darkstardevx/.dotfiles                                                   #
 ###############################################################################################
 #
-#When setting up a new aliases file be sure to check for possible
-#naming conflicts with other apps or bash files.
+#When setting up a new alias file be sure to check
+#for possible naming conflicts with other files.
 #
-#Use xed, gedit or your favorite editor, or alter for ksh, sh, etc.
-# ea - alias for editing aliases
-#
-# Aliases
-# alias alias_name="command_to_run"
-#
-# The aliases should be named in a way that is easy to remember. Add comments for future reference.
 
 alias ea='xed ~/.bash_aliases; source ~/.bash_aliases && source $HOME/.bash_aliases && echo "aliases sourced  --ok."'
 
