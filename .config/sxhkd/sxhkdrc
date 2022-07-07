@@ -1,0 +1,375 @@
+#! /bin/sh
+#           _     _       _ 
+#          | |   | |     | |
+#  _____  _| |__ | | ____| |
+# / __\ \/ / '_ \| |/ / _` |
+# \__ \>  <| | | |   < (_| |
+# |___/_/\_\_| |_|_|\_\__,_|
+# Simple X Hotkey Daemon
+# https://github.com/baskerville/sxhkd
+
+# Coded by:
+# Darkstardevx [darkstardevx@gmail.com]
+# https://github.com/darkstardevx/dotfiles/sxhkd/
+
+###############################################
+#### SXHKD Config - WM Independent Hotkeys ####
+###############################################
+
+# Terminal Emulator (xfce4)
+super + Return
+	xfce4-terminal
+	
+# Terminal Emulator (alacritty)
+super + x
+	alacritty
+	
+# Terminal Emulator (kitty)
+super + k
+	kitty
+	
+# Terminal Emulator (termite)
+super + z
+	termite
+	
+# Notes (Simplenote)
+super + s
+    simplenote
+        
+# Htop
+super + h
+    alacritty -t 'htop task manager' -e htop	
+        
+# Notes (mousepad)
+super + i
+	mousepad
+	
+# File Manager (thunar)
+super + t
+	thunar
+	
+# AppFinder
+super + l
+	xfce4-appfinder
+	
+# Web Browser (google-chrome)
+super + c
+	google-chrome-stable --disable -gpu
+	
+# Web Browser
+super + shift + c
+    chromium --disable -gpu
+	
+# Web Browser (firefox)
+super + f
+	firefox
+	
+# Web Browser (brave-bin)
+super + shift + b
+	brave-bin
+	
+# Web Browser (brave-nightly-bin)
+super + shift + n
+	brave-nightly-bin
+	
+# IRC (HexChat)
+super + m
+	hexchat
+	
+# Video Player (vlc)
+super + shift + v
+    vlc
+    
+# Video Player (celluloid)
+super + shift + v
+    celluloid
+	
+# Notes (Joplin)
+super + shift + j
+	joplin-desktop
+
+# Image Viewer (Shotwell)
+super + g
+	shotwell
+	
+# Colors (GColor3)
+super + p
+    gcolor3
+        
+# Music Player (Spotify)
+super + o
+	spotify
+	
+# Sound Control (Pavucontrol)
+super + v
+    pavucontrol
+    
+# Bluetooth Manager
+super + b
+    blueman-manager
+	
+# File Manager (Pcmanfm)
+super + w
+	pcmanfm
+	
+# File Manager (Ranger)
+super + shift + o
+     alacritty -t "ranger" -e ranger
+	
+# Lockscreen (Betterlockscreen)
+# https://github.com/betterlockscreen/betterlockscreen
+super + shift + x
+	betterlockscreen -l dim -w
+	
+# Lxappearance (System Themes & Icons)
+super + 1
+	lxappearance
+	
+# Lxrandr (Display Positioning)
+super + 2
+	lxrandr
+	
+# Xcfe4 TaskManager (Gnome System Monitor)
+ctrl + shift + Escape
+    gnome-system-monitor
+
+# Scratchpad Dropdown
+super + u
+        scratchpad.sh dropdown
+        
+# hkhelper (hkhelper is a python utility that parses sxhkdhrc-files for valid blocks of keybinds to create a documented list associating the description, the keybinding and the action to execute. It can be used in conjunction with rofi/dmenu to have a fuzzy searchable cheatsheet of your configured keybinds.)
+super + alt + k
+		python hkhelper.py
+            
+#
+# Menus
+#
+        
+# Clipboard (greenclip)
+# https://github.com/erebe/greenclip
+super + shift + g
+    rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+    
+super + alt + b
+	bash -c '~/.config/rofi/bluetooth.sh';
+	
+super + alt + n
+	bash -c '~/.config/rofi/networks.sh';
+
+super + alt + p
+	~/.config/rofi/powermenu.sh
+	
+# Show window menu
+super + grave
+	rofi -no-fixed-num-lines -no-lazy-grab -show window -config ~/.config/rofi/window.rasi
+        
+# Picom Toggle
+ctrl + alt + o
+    ~/.config/bspwm/scripts/picom-toggle.sh
+        
+# Screenshots (Deepin screenshot tool)
+ctrl + Print
+     deepin-screenshot
+# full screen picture
+shift + Print
+     deepin-screenshot -f
+# top window
+super + Print
+     deepin-screenshot -w
+
+############################################        
+#### SXHKD / BSPWM Custom Configuration ####
+############################################
+        
+# Change Layouts
+alt + control + {1,2,3,4}
+  ~/.config/bspwm/scripts/config_scheme {first_child,longest_side,spiral,manual}
+  
+# Move Focus
+super + {j,k}
+    ~/.config/bspwm/scripts/move_focus {HDMI-0, DVI-0}
+
+# Program Launcher (rofi)
+super + d
+	rofi -lines 12 -padding 18 -width 80 -location 0 -show drun -sidebar-mode -columns 3 -font 'Hack Nerd 8' -icon-theme "Papirus" -show-icons -markup
+
+# Reload SXHKD Configuration File
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# Reload BSPWM Configuration File	
+super + a
+    /home/raven/.config/bspwm/bspwmrc
+    
+# Reload GTK Theme
+super + shift + r
+	reload_gtk_theme
+	
+#######################
+#### BSPWM Hotkeys ####
+#######################
+
+# Powermenu
+super + shift + z
+	/home/raven/.config/bspwm/scripts/powermenu1.sh
+
+# quit/restart bspwm
+super + alt + {q,r}
+	bspc {quit,wm -r}
+	
+# quit/restart bspwm
+super + shift + {Escape}
+	bspc {quit}
+
+# close and kill
+super + {_,shift + }q
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+super + shift + m
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest node
+super + g
+	bspc node -s biggest
+
+#######################
+#### State / Flags ####
+#######################
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+######################
+#### Focus / Swap ####
+######################
+
+# swap windows
+super + shift + {h,j,k,l}
+	bspc node -s {west,south,north,east}
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous node in the current desktop
+super + shift + {comma,period}
+	bspc node -f {next,prev}.local
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+#super + {_,shift + }{1-9,0}
+#	bspc {desktop -f,node -d} '^{1-9,10}'
+	
+# Send to desktop
+super + shift + {1-9,0}
+    bspc node -d '^{1-9,10}' --follow
+
+# Send to monitor
+super + shift + equal
+    bspc node -m last --follow
+
+###################
+#### Preselect ####
+###################
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#######################
+#### Move / Resize ####
+#######################
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+	
+#######################
+######### Tabc ########
+#######################
+	
+# Add focused window to a tabbed instance in given direction
+super + t; {h,j,k,l}
+    tabc add $(bspc query -N -n focused) $(bspc query -N -n {west,south,north,east})
+
+# Remove one tab from tabbed
+super + t; r
+    tabc remove-child $(bspc query -N -n focused)
+    
+#######################
+####### Extra #########
+#######################
+    
+# Show clipmenu
+alt + v
+    CM_LAUNCHER=rofi clipmenu \
+        -location 1 \
+        -m -3 \
+        -no-show-icons \
+        -theme-str '* \{ font: 10px; \}' \
+        -theme-str 'listview \{ spacing: 0; \}' \
+        -theme-str 'window \{ width: 20em; \}'
+        
+# Generate password
+super + r ; g ; p
+    tr -dc "a-zA-Z0-9_#@.-" < /dev/urandom | head -c 14 | xclip -selection clipboard
+
+# Change wallpaper
+super + r ; c ; b
+    RAND=$(find "$WALLPAPERS" -xtype f | sort -R | head -1) \
+        xwallpaper --zoom "$WALLPAPERS/$RAND"
+        
+# Close screen
+super + shift + s
+    sleep 0.5; xset dpms force standby
+
+# Lock screen
+super + shift + l
+    betterlockscreen -l dim -t ''
