@@ -1,0 +1,249 @@
+# Starship (Cross-Shell Prompt)
+# ~/.config/starship.toml
+#
+#     _                 _     _       
+#    | |               | |   (_)      
+# ___| |_ __ _ _ __ ___| |__  _ _ __  
+#/ __| __/ _` | '__/ __| '_ \| | '_ \ 
+#\__ \ || (_| | |  \__ \ | | | | |_) |
+#|___/\__\__,_|_|  |___/_| |_|_| .__/ 
+#                              | |    
+#                              |_|    
+#
+# The minimal, blazing-fast, and infinitely customizable prompt for any shell!
+# https://starship.rs/
+# sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+#
+[battery]
+full_symbol = "🔋"
+charging_symbol = "⚡️"
+discharging_symbol = "💀"
+unknown_symbol = ""
+empty_symbol = ""
+
+[[battery.display]]  # "bold red" style and discharging_symbol when capacity is between 0% and 10%
+threshold = 10
+style = "bold red"
+
+[[battery.display]]  # "bold yellow" style and 💦 symbol when capacity is between 10% and 30%
+threshold = 30
+style = "bold yellow"
+discharging_symbol = "💦"
+
+# when capacity is over 30%, the battery indicator will not be displayed
+
+# Replace the "❯" symbol in the prompt with "➟"
+[character]      # The name of the module we are configuring is "character"
+use_symbol_for_status = true
+symbol = "  ➟"     # The "symbol" segment is being set to "➜"
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+style_success = "bold #00A652"
+style_failure = "bold #df382c"
+
+# configure directory
+[directory]
+truncation_length = 10
+truncate_to_repo = true # truncates directory to root folder if in github repo
+prefix = " 📂️ "
+style = "bold italic #87A752"
+read_only = "🔒"
+read_only_style = "bold italic #cc0000"
+
+# shows the hostname on new lines
+[hostname]
+ssh_only = false
+prefix = "💻️ "
+# suffix = ">>"
+trim_at = "-"
+disabled = false
+style = "bold italic #87A752"
+
+[username]
+style_user = "bold dimmed blue"
+show_always = true
+
+[nix_shell]
+disabled = true
+use_name = true
+impure_msg = "impure shell"
+pure_msg = "pure shell"
+symbol = "❄️  "
+
+#[crystal]
+#format = "via [✨ $version](bold blue) "
+
+[dart]
+format = "via [🔰 $version](bold red) "
+
+[deno]
+format = "via [🦕 $version](green bold) "
+
+#[docker_context]
+#format = "via [🐋 $context](blue bold)"
+
+[gcloud]
+format = 'on [$symbol$account(@$domain)(\($project\))]($style) '
+
+# Git Branch
+[git_branch]
+symbol = "🌱 "
+truncation_length = 4
+truncation_symbol = ""
+style = "bold yellow"
+
+# Git Commit
+[git_commit]
+commit_hash_length = 4
+tag_symbol = "🔖 "
+
+[git_metrics]
+added_style = "bold blue"
+format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+
+# Git State
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+cherry_pick = "[🍒 PICKING](bold red)"
+
+[git_status]
+conflicted = "⚔️ "
+ahead = "🏎💨 "
+behind = "🐢 "
+diverged = "🔱 "
+untracked = "🛤️  ×"
+untracked_count.enabled = true
+stashed = "📦 "
+modified = "📝 ×"
+modified_count.enabled = true
+staged = "🗃️  ×"
+staged_count.enabled = true
+renamed = "👅 ×"
+renamed_count.enabled = true
+deleted = "🗑️  ×"
+deleted_count.enabled = true
+prefix = ""
+suffix = ""
+style = "bright-white"
+
+#[golang]
+#format = "via [🏎💨 $version](bold cyan) "
+
+[cmd_duration]
+min_time = 4
+show_milliseconds = false
+disabled = false
+prefix = " ⏲️  "
+style = "bold italic #87A752"
+
+[memory_usage]
+disabled = false
+show_percentage = true
+show_swap = true
+threshold = -1
+symbol = "🐏 "
+separator = "/"
+style = "bold dimmed green"
+
+[time]
+format = "🕙 %I:%M"
+style = "bright-white"
+disabled = false
+use_12hr = true
+
+#
+# Programming Languages
+#
+# Docker Context
+[docker_context]
+symbol = "🐋 "
+
+# Elixir
+[elixir]
+symbol = "🔮 "
+
+# Elm
+[elm]
+symbol = "🌳 "
+
+#[erlang]
+#format = "via [e $version](bold red) "
+
+# Golang
+[golang]
+symbol = "🏎💨 "
+
+# Haskell
+[haskell]
+symbol = " "
+
+# Java
+[java]
+symbol = "☕ "
+style = "bold red"
+
+[julia]
+symbol = "ஃ "
+style = "bold green"
+
+[crystal]
+symbol = "🔮"
+style = "bold blue"
+
+# Ocaml
+[ocaml]
+symbol = "🐪 "
+
+# PHP
+[php]
+symbol = "🔹 "
+
+# Python
+[python]
+symbol = "👾 "
+pyenv_version_name = true
+pyenv_prefix = "foo "
+
+# Ruby
+[ruby]
+symbol = "🔺 "
+
+# Dotnet
+[dotnet]
+symbol = "🥅 "
+style = "green"
+heuristic = false
+
+# Erlang
+[erlang]
+symbol = "e "
+
+# Rust
+[rust]
+symbol = "⚙️ "
+
+[singularity]
+symbol = "📦 "
+
+# HG
+[hg_branch]
+symbol = "🌱 "
+truncation_length = 4
+truncation_symbol = ""
+
+[kubernetes]
+symbol = "⛵ "
+style = "dimmed green"
+disabled = false
+[kubernetes.context_aliases]
+"dev.local.cluster.k8s" = "dev"
+
+# NodeJS
+[nodejs]
+symbol = "🤖 "
+
+# Package Version
+[package]
+symbol = "📦 "
+
+
