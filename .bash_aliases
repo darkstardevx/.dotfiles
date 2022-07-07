@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
 #
 ###############################################################################################
-# Ultimate Bash Aliases for Arch Linux                                                        #
-# Collected from various sources                                                              #
-# Darkstardevx [darkstardevx@gmail.com]                                                       #    
-# https://github.com/darkstardevx/.dotfiles                                                   #
+# Ultimate Bash Aliases Script                                                                #                                                             #
+# Created by Darkstardevx [darkstardevx@gmail.com]                                            #    
+# https://github.com/darkstardevx/.dotfiles/blob/main/.bash_aliases                           #
 ###############################################################################################
 #
-#When setting up a new alias file be sure to check
-#for possible naming conflicts with other files.
-#
-
+## Bash Aliases ##
 alias ea='xed ~/.bash_aliases; source ~/.bash_aliases && source $HOME/.bash_aliases && echo "aliases sourced  --ok."'
 
 # open bashrc & edit
@@ -19,7 +15,6 @@ alias bsh='xed ~/.bashrc; source ~/.bashrc && source $HOME/.bashrc && echo "Bash
 # Source bash_profile
 alias bashpsrc='source ~/.bash_profile && echo "Bash Sourced  --ok."'
 
-## Refresh Sources ##
 # Refresh .bashrc (source)
 alias rebash='source ~/.bashrc'
 
@@ -38,15 +33,8 @@ alias redock='source ~/.docker_aliases'
 # Refresh .git_aliases (source)
 alias regit='source ~/.git_aliases'
 
-# xprop
-alias xpc='xprop WM_CLASS'
-
 # Ccat (cat) colorize cat output
 alias cat='ccat'
-
-alias nf='neofetch'
-
-alias yayskip='yay -S --mflags --skipinteg'
 
 alias redkill='pkill -USR1 redshift'
 
@@ -82,6 +70,9 @@ alias shutdown="sudo /sbin/shutdown"
 alias flighton='sudo rfkill block all'
 alias flightoff='sudo rfkill unblock all'
 
+# xprop
+alias xpc='xprop WM_CLASS'
+
 # Show Open Ports
 alias ports='sudo netstat -tulanp'
 
@@ -99,7 +90,7 @@ alias pscpu10="ps auxf | sort -nr -k 3 | head -10"
 # Get details of a process
 alias paux='ps aux | grep'
 
-# Get server cpu info
+# Get server cpu info (lscpu)
 alias cpuinfo="lscpu"
 
 # Grabs the disk usage in the current directory
@@ -111,12 +102,11 @@ alias totalusage='df -hl --total | grep total'
 # Shows the individual partition usages without the temporary memory values
 alias partusage='df -hlT --exclude-type=tmpfs --exclude-type=devtmpfs'
 
-# Fortune
-alias fort='fortune'
-
 # Cowsay & Fortune
-alias cowfor='cowthink $(fortune)'
-alias cowfort='cowsay $(fortune -o)'
+alias fort='fortune'
+alias cfort='cowfortune'
+alias cowt='cowthink $(fortune)'
+alias cowsf='cowsay $(fortune -o)'
 alias forsay='fortune -c | cowthink -f $(find /usr/share/cows -type f | shuf -n 1)'
 alias forthink='fortune -a | fmt -80 -s | $(shuf -n 1 -e cowsay cowthink) -$(shuf -n 1 -e b d g p s t w y) -f $(shuf -n 1 -e $(cowsay -l | tail -n +2)) -n'
 
@@ -171,7 +161,7 @@ alias diff='diff --color=auto'
 alias ip='ip -color=auto'
 
 # List all files larger than a given size.
-# For example, llfs +10k will find and display all files larger than 10 kilobytes in the currect directory #hierarchy.
+# Example: llfs +25k will find and display all files larger than 25 kilobytes in the currect directory #hierarchy.
 alias llfs='_f(){ find . -type f -size "$1" -exec ls --color --classify --human-readable -l {} \; ; }; _f'
 
 # Alias for alert
@@ -187,7 +177,7 @@ alias mp="mplayer -fs"      # MPlayer custom alias
 alias folders="find . -maxdepth 1 -type d -print | xargs du -sk | sort -rn"
 
 # Make the ls command output in color
-# This alias is overridden if using Bash_It or liquidprompt
+# This alias is overridden if using BashIt or liquidprompt
 alias ls="ls --color=auto"
 #
 alias rm='rm -i'
@@ -200,16 +190,16 @@ alias h='history'
 alias j='jobs -l'
 alias which='type -a'
 
-#The qmv Rename Utility
+# The qmv Rename Utility
 #
-#The qmv utility is used to rename files by way of an auto-generated document of filenames that will be opened #in your editor ready for modification; the renames will be applied after the editor has exited. This utility is #especially useful for bulk renames where the power of editor substitution can be used to quickly specify the #desired renames.
+# The qmv utility is used to rename files by way of an auto-generated document of filenames that will be opened #in your editor ready for modification; the renames will be applied after the editor has exited. This utility is #especially useful for bulk renames where the power of editor substitution can be used to quickly specify the #desired renames.
 
-#By default, qmv will use two editor columns, in my experience this consumes too much valuable real-estate for #little benefit, hence, I recommend the following Bash alias (force destination-only):
+# By default, qmv will use two editor columns, in my experience this consumes too much valuable real-estate for #little benefit, hence, I recommend the following Bash alias (force destination-only):
 alias qmv='qmv -f do'
 
-#Usage
-#qmv **/*.JPG # rename to lowercase '.jpg' extension via substitution
-#qmv *.old    # rename to '.BAK' extension also via substitution
+# Usage
+# qmv **/*.JPG # rename to lowercase '.jpg' extension via substitution
+# qmv *.old    # rename to '.BAK' extension also via substitution
 
 #
 # Pretty-print of some PATH variables:
@@ -980,4 +970,4 @@ alias yarep='yay -Si'	                                    # Display information 
 alias yareps='yay -Ss'	                                    # Search for packages in the repositories
 alias yaupg='yay -Syu'	                                    # Sync with repositories before upgrading packages
 alias yasu='yay -Syu --no-confirm'	                        # Same as yaupg, but without confirmation
-
+alias yayskip='yay -S --mflags --skipinteg'                 # Skip PGP check
