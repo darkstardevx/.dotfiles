@@ -1,0 +1,7 @@
+configuration {
+	width: 1000;
+	show-icons: false;
+	auto-select: false;
+	display-clipboard: "  ";
+	font: "Hack Nerd 8";
+}

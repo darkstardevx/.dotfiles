@@ -1,0 +1,18 @@
+/* The default rofi configuration */
+configuration {
+	show-icons: true;
+	terminal: "kitty";
+	auto-select: false;
+	theme: "solarized";
+        icon-theme: "Papirus";
+        sidebar-mode: true;
+        dynamic: true;
+        disable-history: false;
+        fullscreen: false;
+	drun-display-format: "{icon} {name}";
+	font: "Hack Nerd 8";
+	modi: "filebrowser,window,run,drun,ssh";
+        transparent-background: rgba ( 0, 0, 0, 0 % );
+}
+
+@import "nord"
