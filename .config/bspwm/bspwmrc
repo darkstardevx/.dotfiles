@@ -12,7 +12,7 @@
 #
 # Coded by:
 # Darkstardevx [darkstardevx@gmail.com]
-# https://github.com/darkstardevx/dotfiles/bspwm/
+# https://github.com/darkstardevx/.dotfiles/bspwm/
 
 # pgrep -x sxhkd > /dev/null || sxhkd &
 
