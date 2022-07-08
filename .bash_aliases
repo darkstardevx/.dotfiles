@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 #
 ###############################################################################################
-# Ultimate Bash Aliases Script                                                                #                                                             #
+# Ultimate Bash Aliases Script                                                                #
 # Created by Darkstardevx [darkstardevx@gmail.com]                                            #    
 # https://github.com/darkstardevx/.dotfiles/blob/main/.bash_aliases                           #
 ###############################################################################################
 #
 ## Bash Aliases ##
-alias ea='xed ~/.bash_aliases; source ~/.bash_aliases && source $HOME/.bash_aliases && echo "aliases sourced  --ok."'
+alias ea='gedit ~/.bash_aliases; source ~/.bash_aliases && source $HOME/.bash_aliases && echo "aliases sourced  --ok."'
 
 # open bashrc & edit
-alias bsh='xed ~/.bashrc; source ~/.bashrc && source $HOME/.bashrc && echo "Bash Sourced  --ok."'
+alias bsh='gedit ~/.bashrc; source ~/.bashrc && source $HOME/.bashrc && echo "Bash Sourced  --ok."'
 
 # Source bash_profile
-alias bashpsrc='source ~/.bash_profile && echo "Bash Sourced  --ok."'
+alias bashpsrc='source ~/.bash_profile && echo "Bash Profile Sourced  --ok."'
 
 # Refresh .bashrc (source)
 alias rebash='source ~/.bashrc'
@@ -36,18 +36,19 @@ alias regit='source ~/.git_aliases'
 # Ccat (cat) colorize cat output
 alias cat='ccat'
 
+# Redshift (kill process)
 alias redkill='pkill -USR1 redshift'
 
 # Edit Files
-alias vimrc='xed ~/.vimrc'
-alias nanorc='xed ~/.nanorc'
-alias bashrc='xed ~/.bashrc'
-alias dockra='xed ~/.docker_aliases'
-alias gita='xed ~/.git_aliases'
-alias bashfun='xed ~/.bash_functions'
-alias inputrc='xed ~/.inputrc'
-alias muttrc='xed ~/.muttrc'
-alias alacr='xed ~/.config/alacritty/alacritty.yml'
+alias vimrc='gedit ~/.vimrc'
+alias nanorc='gedit ~/.nanorc'
+alias bashrc='gedit ~/.bashrc'
+alias dockra='gedit ~/.docker_aliases'
+alias gita='gedit ~/.git_aliases'
+alias bashfun='gedit ~/.bash_functions'
+alias inputrc='gedit ~/.inputrc'
+alias muttrc='gedit ~/.muttrc'
+alias alacr='gedit ~/.config/alacritty/alacritty.yml'
 
 # Terminals
 alias icat="kitty +kitten icat"
@@ -76,7 +77,7 @@ alias xpc='xprop WM_CLASS'
 # Show Open Ports
 alias ports='sudo netstat -tulanp'
 
-# Free and Used
+# Memory (Free and Used)
 alias meminfo="free -m -l -t"
 
 # Get top process eating memory
@@ -153,6 +154,13 @@ alias ls='ls -F'
 alias lt='ls --human-readable --size -1 -S --classify'
 alias lls='ls -la --sort=size'
 alias llt='ls -la --sort=time'
+
+# Colorls (gem install colorls)
+alias lxs='colorls -a'
+alias lxsl='colorls -a -l'
+alias lxsg='colorls -a --gs'
+alias lxsd='colorls -lA --sd'
+alias lxsr='colorls --report -a'
 
 # Diff Color Output
 alias diff='diff --color=auto'
